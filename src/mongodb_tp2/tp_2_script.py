@@ -8,6 +8,12 @@ def connect2DB():
     print("✅ Successfully connected to MongoDB!")
     return client
 
+def show_case_collection_docuements(collection):
+    cursor = collection.find()
+    for document in cursor:
+        print(document)
+
+
 
 if __name__ == '__main__':
     client = connect2DB()
@@ -87,7 +93,7 @@ if __name__ == '__main__':
         "acteurs": ["Ahmed", "Oussama", "Anas", "Ali"],
         "noteIMDB" : "Anglaise" # ajout du champs noteIMDB
     })
-
+    show_case_collection_docuements(collection_films)
     # 7. Créez une collection Realisateurs et insérez plusieurs documents simples
     # (id, nom, pays)
 
@@ -110,17 +116,13 @@ if __name__ == '__main__':
             { "id": 4, "nom": "Quentin Tarantino", "pays": "USA", "annee_naissance": 1963,"nombre_films": 9 , "films": ["film1", "film2"] },
         ]
     )
-
+    show_case_collection_docuements(collection_realisateurs)
     # 14.Créez une collection Seances et insérez plusieurs documents contenant :
     # 15.un identifiant de film,
     # 16.une date de projection,
     # 17.une salle,
     # 18.un champ optionnel (tickets_vendus).
-    # Exemple :
-    # db.Seances.insertMany([
-    # { film_id: 1, date: "2025-10-15", salle: "Salle A", tickets_vendus: 120 },
-    # { film_id: 2, date: "2025-10-20", salle: "Salle B" }
-    # ])
+
 
     collection_seance = db_CinemaDB['Seance']
     collection_seance.insert_many([
@@ -128,6 +130,7 @@ if __name__ == '__main__':
         {"film_id": 2, "date": "2025-10-20", "salle": "Salle B"},
         {"film_id": 3, "date": "2025-10-20", "tickets_vendus": 120 }
     ])
+    show_case_collection_docuements(collection_seance)
 
 
 
